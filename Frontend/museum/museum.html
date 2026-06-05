@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lostgarden — the museum</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="museum.css">
+</head>
+<body>
+    <div class="botanicals" aria-hidden="true">
+        <span class="leaf l1">✦</span>
+        <span class="leaf l2">🌿</span>
+        <span class="leaf l3">✦</span>
+        <span class="leaf l4">🌿</span>
+        <span class="leaf l5">✦</span>
+        <span class="leaf l4">🌿</span>
+        <span class="leaf l5">✦</span>
+    </div>
+
+    <header class="top-bar">
+        <div class="logo">🌿 lostgarden</div>
+        <div class="center-title">the museum</div>
+        <div class="user-area">
+            <span class="username" id="usernameDisplay">sprout</span>
+            <button class="exit-btn" id="logoutBtn">exit</button>
+        </div>
+    </header>
+
+    <main class="museum-container">
+        <div class="museum-header">
+            <div class="title-section">
+                <h1 class="page-title">the museum</h1>
+                <p class="page-subtitle">things people have left behind</p>
+            </div>
+            <button class="floating-add" id="createBtn" aria-label="add artifact">+</button>
+        </div>
+        <div class="filters-row">
+            <div class="filter-group">
+                <label>mood</label>
+                <select id="moodFilter">
+                    <option value="all">all moods</option>
+                    <option value="nostalgia">nostalgic</option>
+                    <option value="loss">loss</option>
+                    <option value="wonder">wonder</option>
+                    <option value="childhood">childhood</option>
+                    <option value="love">love</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>era</label>
+                <select id="eraFilter">
+                    <option value="all">all eras</option>
+                    <option value="childhood">childhood</option>
+                    <option value="recent">recent</option>
+                    <option value="long ago">long ago</option>
+                </select>
+            </div>
+            <div class="filter-group search-group">
+                <label>search</label>
+                <input type="text" id="searchInput" placeholder="search artifacts...">
+            </div>
+        </div>
+        <div class="artifact-grid" id="artifactGrid">
+            <!-- cards will be injected here -->
+        </div>
+        <div class="loading-state" id="loadingState" style="display: none;">
+            <p>loading the archives...</p>
+        </div>
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <p>the museum is quiet.</p>
+            <p class="empty-sub">be the first to leave something behind →</p>
+        </div>
+    </main>
+    <script src="museum.js"></script>
+</body>
+</html>
