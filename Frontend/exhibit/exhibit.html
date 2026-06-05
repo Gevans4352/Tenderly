@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lostgarden — exhibit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="exhibit.css">
+</head>
+<body>
+    <div class="botanicals" aria-hidden="true">
+        <span class="leaf l1">✦</span>
+        <span class="leaf l2">🌿</span>
+        <span class="leaf l3">✦</span>
+        <span class="leaf l4">🌿</span>
+        <span class="leaf l3">✦</span>
+        <span class="leaf l4">🌿</span>
+        <span class="leaf l3">✦</span>
+        <span class="leaf l4">🌿</span>
+    </div>
+
+    <nav class="top-bar">
+        <a href="../museum/museum.html" class="back-link">← back to the museum</a>
+        <span class="exhibit-number" id="exhibitNumber">exhibit · —</span>
+    </nav>
+
+    <main class="exhibit-page">
+
+        <section class="artifact-zone">
+
+            <div class="artifact-left">
+                <p class="mood-era" id="moodEra">· ·</p>
+                <h1 class="artifact-title" id="artifactTitle">—</h1>
+                <p class="artifact-body" id="artifactBody"></p>
+                <p class="artifact-meta" id="artifactMeta"></p>
+            </div>
+
+            <div class="reactions-cluster" id="reactionsCluster">
+                <button class="reaction-btn" data-emoji="🌿" id="react-plant">
+                    <span class="reaction-emoji">🌿</span>
+                    <span class="reaction-count" id="count-plant">0</span>
+                </button>
+                <button class="reaction-btn" data-emoji="❤️" id="react-heart">
+                    <span class="reaction-emoji">❤️</span>
+                    <span class="reaction-count" id="count-heart">0</span>
+                </button>
+                <button class="reaction-btn" data-emoji="✨" id="react-spark">
+                    <span class="reaction-emoji">✨</span>
+                    <span class="reaction-count" id="count-spark">0</span>
+                </button>
+            </div>
+
+        </section>
+
+        <div class="branches-divider">
+            <span class="branches-label" id="branchesLabel">no notes yet</span>
+        </div>
+
+        <section class="branches-zone" id="branchesZone">
+            <!-- injected by JS -->
+        </section>
+
+        <section class="plant-zone">
+            <p class="plant-label">leave a note on this wall</p>
+            <div class="plant-input-row">
+                <input type="text" id="branchInput"
+                placeholder="what does this bring up for you..." />
+                <button class="pin-btn" id="pinBtn">pin it →</button>
+            </div>
+            <p class="plant-error" id="plantError"></p>
+        </section>
+
+    </main>
+
+    <script src="exhibit.js"></script>
+</body>
+</html>
