@@ -21,13 +21,13 @@ const previewEra    = document.getElementById('previewEra')
 // live preview
 titleInput.addEventListener('input', () => {
     const val = titleInput.value.trim()
-    previewTitle.textContent = val || 'your exhibit will appear here'
+    previewTitle.textContent = val || 'Your exhibit will appear here'
     previewTitle.classList.toggle('has-content', val.length > 0)
 })
 
 bodyInput.addEventListener('input', () => {
     const val = bodyInput.value.trim()
-    previewBody.textContent = val || 'start writing to see a preview...'
+    previewBody.textContent = val || 'Start writing to see a preview...'
     previewBody.classList.toggle('has-content', val.length > 0)
 })
 
@@ -48,8 +48,8 @@ submitBtn.addEventListener('click', async () => {
     const title = titleInput.value.trim()
     const body  = bodyInput.value.trim()
 
-    if (!title) return errorMsg.textContent = 'give it a name first'
-    if (!body)  return errorMsg.textContent = 'describe it a little'
+    if (!title) return errorMsg.textContent = 'Give it a name first'
+    if (!body)  return errorMsg.textContent = 'Describe it a little'
 
     errorMsg.textContent = ''
     submitBtn.textContent = 'placing in the museum...'
@@ -80,11 +80,11 @@ submitBtn.addEventListener('click', async () => {
             return
         }
 
-        window.location.href = `exhibit.html?id=${data.id}`
+        window.location.href = `../exhibit/exhibit.html?id=${data.id}`
 
     } catch (err) {
-        errorMsg.textContent = 'could not reach the museum'
-        submitBtn.textContent = 'place in the museum'
+        errorMsg.textContent = 'Could not reach the museum'
+        submitBtn.textContent = 'Place in the museum'
         submitBtn.disabled = false
     }
 })
