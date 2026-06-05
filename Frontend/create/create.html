@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lostgarden — leave something behind</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="create.css">
+</head>
+<body>
+
+    <div class="botanicals" aria-hidden="true">
+        <span class="leaf l1">✦</span>
+        <span class="leaf l2">🌿</span>
+        <span class="leaf l3">✦</span>
+        <span class="leaf l4">🌿</span>
+        <span class="leaf l5">✦</span>
+    </div>
+
+    <a href="../museum/museum.html" class="back-link">← back to the museum</a>
+
+    <main class="page">
+
+        <div class="left">
+
+            <p class="exhibit-tag">exhibit · new entry</p>
+            <h1 class="title">leave something<br><em>behind.</em></h1>
+            <p class="subtitle">what have you lost, forgotten, or outgrown?</p>
+
+            <div class="divider"></div>
+
+            <div class="form">
+
+                <div class="field">
+                    <label for="title">give it a name</label>
+                    <input type="text" id="title"
+                    placeholder="the thing you're leaving here"
+                    autocomplete="off" />
+                </div>
+
+                <div class="field">
+                    <label for="body">describe it</label>
+                    <textarea id="body"
+                    placeholder="write as little or as much as you need..."
+                    rows="5"></textarea>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="mood">mood</label>
+                        <select id="mood">
+                            <option value="">no mood</option>
+                            <option value="nostalgia">nostalgia</option>
+                            <option value="loss">loss</option>
+                            <option value="wonder">wonder</option>
+                            <option value="childhood">childhood</option>
+                            <option value="love">love</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="era">era</label>
+                        <select id="era">
+                            <option value="">no era</option>
+                            <option value="childhood">childhood</option>
+                            <option value="recent">recent</option>
+                            <option value="long ago">long ago</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="field anon-field">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="isAnonymous" />
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">leave this anonymously</span>
+                    </label>
+                </div>
+
+                <p class="error-msg" id="error"></p>
+
+                <button class="btn-primary" id="submitBtn">place in the museum</button>
+
+            </div>
+
+        </div>
+
+        <div class="right" aria-hidden="true">
+            <div class="exhibit-preview" id="preview">
+                <span class="preview-tag" id="previewTag">memory</span>
+                <p class="preview-title" id="previewTitle">your exhibit will appear here</p>
+                <div class="ghost-line"></div>
+                <p class="preview-body" id="previewBody">start writing to see a preview...</p>
+                <div class="preview-footer">
+                    <span class="preview-anon" id="previewAnon">by you</span>
+                    <span class="preview-era" id="previewEra"></span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="create.js"></script>
+</body>
+</html>
