@@ -3,7 +3,7 @@ const token = localStorage.getItem("token");
 const username = localStorage.getItem("username");
 
 if (!token) {
-  window.location.href = "login.html";
+  window.location.href = "../login/login.html";
 }
 
 document.getElementById("usernameDisplay").textContent = username || "guest";
@@ -11,7 +11,7 @@ document.getElementById("usernameDisplay").textContent = username || "guest";
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("token");
   localStorage.removeItem("username");
-  window.location.href = "index.html";
+  window.location.href = "../index.html";
 });
 
 const artifactGrid = document.getElementById("artifactGrid");
@@ -84,11 +84,10 @@ function renderArtifacts() {
                 <span class="author">by ${artifact.is_anonymous ? "anon" : artifact.username || "someone"}</span>
                 <span class="branch-count">🌿 ${artifact.branch_count || 0}</span>
             </div>
-            <div class="reactions-row">
-                <span class="reaction">❤️ ${artifact.hearts || 0}</span>
-                <span class="reaction">✨ ${artifact.stars || 0}</span>
-                <span class="reaction">🌙 ${artifact.moons || 0}</span>
-            </div>
+          <div class="reactions-row">
+            <span class="reaction">🌿 ${artifact.branch_count || 0}</span>
+            <span class="reaction">❤️ ${artifact.reaction_count || 0}</span>
+          </div>
         </div>
     `,
     )
@@ -97,7 +96,7 @@ function renderArtifacts() {
   document.querySelectorAll(".artifact-card").forEach((card) => {
     card.addEventListener("click", () => {
       const id = card.dataset.id;
-      window.location.href = `exhibit.html?id=${id}`;
+      window.location.href = `../exhibit/exhibit.html?id=${id}`;
     });
   });
 }
