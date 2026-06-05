@@ -69,7 +69,7 @@ loginBtn.addEventListener("click", async () => {
 
     localStorage.setItem("token", data.token);
     localStorage.setItem("username", data.username);
-    window.location.href = "museum.html";
+    window.location.href = "../museum/museum.html";
   } catch (err) {
     errorEl.textContent = "Can't reach the garden. Server unavailable";
     console.error(err);
