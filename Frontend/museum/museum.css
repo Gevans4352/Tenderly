@@ -294,6 +294,8 @@ body {
   transform-origin: center;
 }
 
+
+
 .artifact-card:nth-child(4n + 1) {
   transform: rotate(-0.8deg);
 }
