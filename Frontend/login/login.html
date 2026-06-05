@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lostgarden — Return</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="botanicals" aria-hidden="true">
+      <span class="leaf l1">✦</span>
+      <span class="leaf l2">🌿</span>
+      <span class="leaf l3">✦</span>
+      <span class="leaf l4">🌿</span>
+      <span class="leaf l5">✦</span>
+      <span class="leaf l4">🌿</span>
+      <span class="leaf l5">✦</span>
+    </div>
+
+    <a href="../index.html" class="back-link">← back to the garden</a>
+
+    <main class="page">
+      <div class="left">
+        <p class="exhibit-tag">exhibit · returning</p>
+        <h1 class="title">come back in.</h1>
+        <p class="subtitle">your garden is waiting.</p>
+        <div class="divider"></div>
+        <div class="form">
+          <div class="field">
+            <label for="email">your email</label>
+            <input type="email" id="email" placeholder="same as before" />
+          </div>
+          <div class="field">
+            <label for="password">your password</label>
+            <div class="input-row">
+              <input
+                type="password"
+                id="password"
+                placeholder="the key you chose"
+              />
+              <button
+                type="button"
+                class="eye-btn"
+                id="eyeBtn"
+                aria-label="toggle password"
+              >
+                <svg
+                  id="eyeOpen"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+                <svg
+                  id="eyeClosed"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  style="display: none"
+                >
+                  <path
+                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"
+                  />
+                  <path
+                    d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"
+                  />
+                  <line x1="1" y1="1" x2="23" y2="23" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <p class="error-msg" id="error"></p>
+          <button class="btn-primary" id="loginBtn">enter the garden</button>
+        </div>
+        <p class="switch-link">
+          never signed the book?
+          <a href="../register/register.html">plant your roots →</a>
+        </p>
+      </div>
+      <div class="right" aria-hidden="true">
+        <div class="ghost-card">
+          <span class="ghost-tag">exhibit no. 0012</span>
+          <p class="ghost-title">the last sunday that felt like home</p>
+          <div class="ghost-line"></div>
+          <span class="ghost-meta">3 branches grown</span>
+          <div class="ghost-tags">
+            <span>childhood</span>
+            <span>memory</span>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="login.js"></script>
+  </body>
+</html>
