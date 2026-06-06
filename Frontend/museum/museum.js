@@ -1,4 +1,4 @@
-const API_BASE = 'https://lostgarden-backend.onrender.com/api'
+const API_BASE = "https://lostgarden-backend.onrender.com/api";
 const token = localStorage.getItem("token");
 const username = localStorage.getItem("username");
 
@@ -6,9 +6,9 @@ if (!token) {
   window.location.href = "../login/login.html";
 }
 
-const myGardenLink = document.getElementById('myGardenLink')
-myGardenLink.textContent = username || 'guest'
-myGardenLink.href = '../garden/garden.html'
+const myGardenLink = document.getElementById("myGardenLink");
+myGardenLink.textContent = username || "guest";
+myGardenLink.href = "../garden/garden.html";
 
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("token");
@@ -19,8 +19,6 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 const artifactGrid = document.getElementById("artifactGrid");
 const loadingState = document.getElementById("loadingState");
 const emptyState = document.getElementById("emptyState");
-const moodFilter = document.getElementById("moodFilter");
-const eraFilter = document.getElementById("eraFilter");
 const searchInput = document.getElementById("searchInput");
 const createBtn = document.getElementById("createBtn");
 
@@ -46,13 +44,12 @@ async function fetchArtifacts() {
 }
 
 function filterArtifacts() {
-  const mood = moodFilter.value;
-  const era = eraFilter.value;
   const search = searchInput.value.toLowerCase();
 
   return allArtifacts.filter((artifact) => {
-    if (mood !== "all" && artifact.mood_tag !== mood) return false;
-    if (era !== "all" && artifact.era_tag !== era) return false;
+    if (selectedMood !== "all" && artifact.mood_tag !== selectedMood)
+      return false;
+    if (selectedEra !== "all" && artifact.era_tag !== selectedEra) return false;
     if (
       search &&
       !artifact.title.toLowerCase().includes(search) &&
@@ -118,12 +115,67 @@ const escapeHtml = (str = "") => {
   return result;
 };
 
-moodFilter.addEventListener("change", renderArtifacts);
-eraFilter.addEventListener("change", renderArtifacts);
 searchInput.addEventListener("input", renderArtifacts);
 
 createBtn.addEventListener("click", () => {
   window.location.href = "../create/create.html";
 });
 
+function initDropdown(selectId, onChange) {
+  const container = document.getElementById(selectId);
+  const trigger = container.querySelector(".select-trigger");
+  const dropdown = container.querySelector(".select-dropdown");
+  const valueEl = container.querySelector(".select-value");
+  const options = container.querySelectorAll(".select-option");
+
+  trigger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = dropdown.classList.contains("open");
+    document
+      .querySelectorAll(".select-dropdown")
+      .forEach((d) => d.classList.remove("open"));
+    document
+      .querySelectorAll(".select-trigger")
+      .forEach((t) => t.classList.remove("open"));
+    if (!isOpen) {
+      dropdown.classList.add("open");
+      trigger.classList.add("open");
+    }
+  });
+
+  options.forEach((option) => {
+    option.addEventListener("click", () => {
+      options.forEach((o) => o.classList.remove("selected"));
+      option.classList.add("selected");
+      valueEl.textContent = option.textContent;
+      dropdown.classList.remove("open");
+      trigger.classList.remove("open");
+      onChange(option.dataset.value);
+    });
+  });
+}
+
+document.addEventListener("click", () => {
+  document
+    .querySelectorAll(".select-dropdown")
+    .forEach((d) => d.classList.remove("open"));
+  document
+    .querySelectorAll(".select-trigger")
+    .forEach((t) => t.classList.remove("open"));
+});
+
+let selectedMood = "all";
+let selectedEra = "all";
+
+
 fetchArtifacts();
+
+initDropdown("moodSelect", (value) => {
+  selectedMood = value;
+  renderArtifacts();
+});
+
+initDropdown("eraSelect", (value) => {
+  selectedEra = value;
+  renderArtifacts();
+});
