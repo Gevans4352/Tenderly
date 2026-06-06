@@ -52,7 +52,7 @@ async function loadReactions() {
 
   const counts = { "🌿": 0, "❤️": 0, "✨": 0 };
   reactions.forEach((r) => {
-    if (counts[r.emoji] !== undefined) counts[r.emoji] = r.count;
+    if (counts[r.emoji] !== undefined) counts[r.emoji] = parseInt(r.count);
   });
 
   document.getElementById("count-plant").textContent = counts["🌿"];
