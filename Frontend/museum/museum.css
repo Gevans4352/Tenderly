@@ -576,6 +576,16 @@ body {
   overflow: hidden;
 }
 
+.garden-stats {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green);
+  opacity: 0.8;
+  margin-top: var(--space-sm);
+}
+
 .card-meta {
   display: flex;
   justify-content: space-between;

@@ -1,4 +1,4 @@
-const API_BASE = 'https://lostgarden-backend.onrender.com/api'
+const API_BASE = "https://lostgarden-backend.onrender.com/api";
 const token = localStorage.getItem("token");
 const username = localStorage.getItem("username");
 
@@ -106,24 +106,6 @@ async function fetchMyArtifacts() {
           .addEventListener("click", () => {
             modal.remove();
           });
-
-        try {
-          const res = await fetch(`${API_BASE}/artifacts/${id}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (res.ok) {
-            fetchMyArtifacts();
-          } else {
-            alert("Could not delete");
-          }
-        } catch (err) {
-          console.error(err);
-          alert("Something went wrong");
-        }
       });
     });
 
@@ -132,6 +114,13 @@ async function fetchMyArtifacts() {
         window.location.href = `../exhibit/exhibit.html?id=${card.dataset.id}`;
       });
     });
+
+    const totalBranches = myArtifacts.reduce(
+      (sum, a) => sum + (parseInt(a.branch_count) || 0),
+      0,
+    );
+    document.getElementById("gardenStats").textContent =
+      `${myArtifacts.length} thing${myArtifacts.length === 1 ? "" : "s"} left behind · ${totalBranches} branch${totalBranches === 1 ? "" : "es"} grown`;
   } catch (err) {
     console.error(err);
   }
