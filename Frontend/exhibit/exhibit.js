@@ -1,4 +1,4 @@
-const API_BASE = 'https://lostgarden-backend.onrender.com/api'
+const API_BASE = "https://lostgarden-backend.onrender.com/api";
 const token = localStorage.getItem("token");
 const username = localStorage.getItem("username");
 
@@ -120,10 +120,14 @@ document.getElementById("pinBtn").addEventListener("click", async () => {
 
   const input = document.getElementById("branchInput");
   const error = document.getElementById("plantError");
+  const pinBtn = document.getElementById("pinBtn");
   const body = input.value.trim();
 
   if (!body) return (error.textContent = "write something first");
   error.textContent = "";
+
+  pinBtn.innerHTML = '<span class="spinner"></span>';
+  pinBtn.disabled = true;
 
   const res = await fetch(`${API_BASE}/branches/${artifactId}`, {
     method: "POST",
@@ -136,9 +140,13 @@ document.getElementById("pinBtn").addEventListener("click", async () => {
 
   if (res.ok) {
     input.value = "";
+    pinBtn.textContent = "pin it →";
+    pinBtn.disabled = false;
     await loadBranches();
   } else {
     error.textContent = "could not pin your note";
+    pinBtn.innerHTML = "pin it →";
+    pinBtn.disabled = false;
   }
 });
 function timeAgo(dateStr) {
