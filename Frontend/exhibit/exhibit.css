@@ -92,7 +92,6 @@ body {
   }
 }
 
-/* top bar */
 .top-bar {
   position: fixed;
   top: 0;
@@ -107,7 +106,21 @@ body {
   backdrop-filter: blur(4px);
   background: rgba(44, 26, 18, 0.85);
 }
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(44, 26, 18, 0.3);
+  border-top-color: var(--canvas);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .back-link {
   font-family: var(--font-sans);
   font-size: 0.72rem;
