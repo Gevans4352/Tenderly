@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api'
+const API_BASE = 'https://lostgarden-backend.onrender.com/api'
 const token = localStorage.getItem('token')
 const username = localStorage.getItem('username')
 
@@ -18,7 +18,6 @@ const previewTag    = document.getElementById('previewTag')
 const previewAnon   = document.getElementById('previewAnon')
 const previewEra    = document.getElementById('previewEra')
 
-// live preview
 titleInput.addEventListener('input', () => {
     const val = titleInput.value.trim()
     previewTitle.textContent = val || 'Your exhibit will appear here'
@@ -43,7 +42,7 @@ anonInput.addEventListener('change', () => {
     previewAnon.textContent = anonInput.checked ? 'by anon' : `by ${username}`
 })
 
-// submit
+
 submitBtn.addEventListener('click', async () => {
     const title = titleInput.value.trim()
     const body  = bodyInput.value.trim()
