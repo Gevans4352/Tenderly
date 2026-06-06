@@ -45,6 +45,7 @@ router.get("/:artifactId", async (req, res) => {
 
     res.json(result.rows);
   } catch (err) {
+    console.error('reactions error:', err.message)
     res.status(500).json({ error: "could not fetch reactions" });
   }
 });
