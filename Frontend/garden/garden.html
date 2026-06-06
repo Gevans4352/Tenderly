@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lostgarden — my garden</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../museum/museum.css" />
+  </head>
+  <body>
+    <div class="botanicals" aria-hidden="true">
+      <span class="leaf l1">✦</span>
+      <span class="leaf l2">🌿</span>
+      <span class="leaf l3">✦</span>
+      <span class="leaf l4">🌿</span>
+      <span class="leaf l5">✦</span>
+    </div>
+
+    <header class="top-bar">
+      <div class="logo">🌿 lostgarden</div>
+      <div class="center-title">my garden</div>
+      <div class="user-area">
+        <span class="username" id="usernameDisplay"></span>
+        <button class="exit-btn" id="logoutBtn">exit</button>
+      </div>
+    </header>
+
+    <main class="museum-container">
+      <div class="museum-header">
+        <div class="title-section">
+          <h1 class="page-title">my garden.</h1>
+          <p class="page-subtitle">things you've left behind</p>
+        </div>
+        <button class="floating-add" id="createBtn" aria-label="add artifact">
+          +
+        </button>
+      </div>
+
+      <div class="artifact-grid" id="artifactGrid"></div>
+      <div class="empty-state" id="emptyState" style="display: none">
+        <p>your garden is empty.</p>
+        <p class="empty-sub">leave your first lost thing →</p>
+      </div>
+    </main>
+
+    <script src="garden.js"></script>
+  </body>
+</html>
