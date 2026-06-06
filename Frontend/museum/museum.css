@@ -88,6 +88,19 @@ body {
   animation-delay: 7s;
 }
 
+.back-link {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--cream);
+}
+
 @keyframes drift {
   0% {
     transform: translateY(0px) rotate(0deg);
