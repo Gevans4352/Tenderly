@@ -43,5 +43,4 @@ db.exec(`
     );
 `)
 
-console.log("Tables Created!");
 process.exit(0);
