@@ -6,7 +6,9 @@ if (!token) {
   window.location.href = "../login/login.html";
 }
 
-document.getElementById("usernameDisplay").textContent = username || "guest";
+const myGardenLink = document.getElementById('myGardenLink')
+myGardenLink.textContent = username || 'guest'
+myGardenLink.href = '../garden/garden.html'
 
 document.getElementById("logoutBtn").addEventListener("click", () => {
   localStorage.removeItem("token");
