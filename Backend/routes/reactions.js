@@ -1,51 +1,52 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db");
+const pool = require("../db");
 const auth = require("../middleware/auth");
 
-router.post("/:artifactId", auth, (req, res) => {
+router.post("/:artifactId", auth, async (req, res) => {
   const { emoji } = req.body;
 
-  const existing = db
-    .prepare(
-      `
-        SELECT * FROM reactions WHERE artifact_id = ? AND user_id = ?
-        `,
-    )
-    .get(req.params.artifactId, req.user.id);
-  if (existing) {
-    db.prepare(
-      `
-            DELETE FROM reactions WHERE artifact_id = ? AND user_id = ?
-            `,
-    ).run(req.params.artifactId, req.user.id);
-    return res.json({
-      message: "Reaction removed",
-    });
+  try {
+    const existing = await pool.query(
+      `SELECT * FROM reactions WHERE artifact_id = $1 AND user_id = $2`,
+      [req.params.artifactId, req.user.id],
+    );
+
+    if (existing.rows.length > 0) {
+      await pool.query(
+        `DELETE FROM reactions WHERE artifact_id = $1 AND user_id = $2`,
+        [req.params.artifactId, req.user.id],
+      );
+      return res.json({ message: "reaction removed" });
+    }
+
+    await pool.query(
+      `INSERT INTO reactions (artifact_id, user_id, emoji) VALUES ($1, $2, $3)`,
+      [req.params.artifactId, req.user.id, emoji],
+    );
+
+    res.json({ message: "reaction added" });
+  } catch (err) {
+    res.status(500).json({ error: "could not toggle reaction" });
   }
-  db.prepare(
-    `
-    INSERT INTO reactions (artifact_id, user_id, emoji)
-    VALUES (?, ?, ?)
-`,
-  ).run(req.params.artifactId, req.user.id, emoji);
-  res.json({
-    message: "Reaction added",
-  });
 });
 
-router.get("/:artifactId", (req, res) => {
-  const reactions = db
-    .prepare(
+router.get("/:artifactId", async (req, res) => {
+  try {
+    const result = await pool.query(
       `
-        SELECT emoji, COUNT (*) as count
-        FROM reactions
-        WHERE artifact_id = ?
-        GROUP BY emoji 
+            SELECT emoji, COUNT(*) as count
+            FROM reactions
+            WHERE artifact_id = $1
+            GROUP BY emoji
         `,
-    )
-    .all(req.params.artifactId);
-  res.json(reactions);
+      [req.params.artifactId],
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: "could not fetch reactions" });
+  }
 });
 
 module.exports = router;

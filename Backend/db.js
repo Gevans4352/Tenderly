@@ -1,8 +1,8 @@
-const Database = require("better-sqlite3");
-const path = require("path");
+const { Pool } = require('pg')
 
-const db = new Database(path.join(__dirname, "tenderly.db"))
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+})
 
-db.pragma("journal_mode = WAL")
-
-module.exports = db 
+module.exports = pool
