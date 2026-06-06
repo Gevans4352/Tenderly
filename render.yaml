@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: lostgarden-backend
+    env: node
+    buildCommand: cd Backend && npm install && node setup.js
+    startCommand: cd Backend && npm start
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: 10000
+        
