@@ -586,6 +586,36 @@ body {
   margin-top: var(--space-sm);
 }
 
+.load-more-wrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-xl) 0;
+}
+
+.load-more-btn {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 0.5px solid var(--muted);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.load-more-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.load-more-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .card-meta {
   display: flex;
   justify-content: space-between;

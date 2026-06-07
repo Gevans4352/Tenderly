@@ -1,4 +1,4 @@
-const API_BASE = "https://lostgarden-backend.onrender.com/api";
+const API_BASE = 'http://localhost:5000/api'
 const token = localStorage.getItem("token");
 const username = localStorage.getItem("username");
 
@@ -23,6 +23,7 @@ const searchInput = document.getElementById("searchInput");
 const createBtn = document.getElementById("createBtn");
 
 let allArtifacts = [];
+let selectedSort = "newest";
 
 async function fetchArtifacts() {
   loadingState.style.display = "block";
@@ -30,7 +31,7 @@ async function fetchArtifacts() {
   emptyState.style.display = "none";
 
   try {
-    const res = await fetch(`${API_BASE}/artifacts`);
+    const res = await fetch(`${API_BASE}/artifacts?sort=${selectedSort}`);
     const data = await res.json();
     allArtifacts = data;
     renderArtifacts();
@@ -167,7 +168,6 @@ document.addEventListener("click", () => {
 let selectedMood = "all";
 let selectedEra = "all";
 
-
 fetchArtifacts();
 
 initDropdown("moodSelect", (value) => {
@@ -178,4 +178,9 @@ initDropdown("moodSelect", (value) => {
 initDropdown("eraSelect", (value) => {
   selectedEra = value;
   renderArtifacts();
+});
+
+initDropdown("sortSelect", (value) => {
+  selectedSort = value;
+  fetchArtifacts();
 });
