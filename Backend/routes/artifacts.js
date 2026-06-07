@@ -27,16 +27,24 @@ router.post("/", auth, async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
+    const sort = req.query.sort || "newest";
+
+    let orderClause = "ORDER BY artifacts.created_at DESC";
+    if (sort === "oldest") orderClause = "ORDER BY artifacts.created_at ASC";
+    if (sort === "branched") orderClause = "ORDER BY branch_count DESC";
+
     const result = await pool.query(`
             SELECT artifacts.*, users.username,
             (SELECT COUNT(*) FROM branches WHERE branches.artifact_id = artifacts.id) as branch_count,
             (SELECT COUNT(*) FROM reactions WHERE reactions.artifact_id = artifacts.id) as reaction_count
             FROM artifacts
             LEFT JOIN users ON artifacts.user_id = users.id
-            ORDER BY artifacts.created_at DESC
+            ${orderClause}
         `);
+
     res.json(result.rows);
   } catch (err) {
+    console.error("fetch error:", err.message);
     res.status(500).json({ error: "could not fetch artifacts" });
   }
 });
@@ -63,26 +71,30 @@ router.get("/:id", async (req, res) => {
 });
 
 router.delete("/:id", auth, async (req, res) => {
-    try {
-        const result = await pool.query(
-            `SELECT * FROM artifacts WHERE id = $1`,
-            [req.params.id]
-        )
-        const artifact = result.rows[0]
+  try {
+    const result = await pool.query(`SELECT * FROM artifacts WHERE id = $1`, [
+      req.params.id,
+    ]);
+    const artifact = result.rows[0];
 
-        if (!artifact) return res.status(404).json({ error: "not found" })
-        if (artifact.user_id !== req.user.id) return res.status(403).json({ error: "not yours to delete" })
+    if (!artifact) return res.status(404).json({ error: "not found" });
+    if (artifact.user_id !== req.user.id)
+      return res.status(403).json({ error: "not yours to delete" });
 
-        // delete related data first
-        await pool.query(`DELETE FROM reactions WHERE artifact_id = $1`, [req.params.id])
-        await pool.query(`DELETE FROM branches WHERE artifact_id = $1`, [req.params.id])
-        await pool.query(`DELETE FROM artifacts WHERE id = $1`, [req.params.id])
+    // delete related data first
+    await pool.query(`DELETE FROM reactions WHERE artifact_id = $1`, [
+      req.params.id,
+    ]);
+    await pool.query(`DELETE FROM branches WHERE artifact_id = $1`, [
+      req.params.id,
+    ]);
+    await pool.query(`DELETE FROM artifacts WHERE id = $1`, [req.params.id]);
 
-        res.json({ message: "artifact deleted" })
-    } catch (err) {
-        console.error('delete error:', err.message)
-        res.status(500).json({ error: "could not delete artifact" })
-    }
-})
+    res.json({ message: "artifact deleted" });
+  } catch (err) {
+    console.error("delete error:", err.message);
+    res.status(500).json({ error: "could not delete artifact" });
+  }
+});
 
 module.exports = router;
